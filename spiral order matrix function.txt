@@ -1,0 +1,48 @@
+vector<int> Solution::spiralOrder(const vector<vector<int> > &A) {
+    int isize=A.size();
+    int jsize=A[0].size();
+    vector<int> temp;
+    int no=1,i=0,j=0;
+    int b=0;//boundary
+    temp.push_back(A[i][j]);//initialize
+    for(int count=1;count<isize*jsize;count++)
+    {
+        switch(no){
+            case 1://left to right
+                if(j==jsize-b-1)
+                {
+                    i++;
+                    no=2;
+                }
+                else j++;
+                break;
+            case 2://up to down
+                if(i==isize-b-1)
+                {
+                    j--;
+                    no=3;
+                }
+                else i++;
+                break;
+            case 3://right to left
+                if(j==b)
+                {
+                    i--;
+                    no=4;
+                }
+                else j--;
+                break;
+            case 4://down to up
+                if(i==b+1)
+                {
+                    j++;
+                    no=1;
+                    b++;
+                }
+                else i--;
+                break;
+        }
+        temp.push_back(A[i][j]);
+    }
+    return temp;
+}
