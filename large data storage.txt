@@ -1,0 +1,30 @@
+string Solution::solve(int A) {
+    vector<int> ans(160,0);
+    string str;
+    ans[0]=1;
+    int carry=0,nextcarry=0;
+    int tip=0;
+    for(int i=1;i<=A;i++)
+    {
+        int count=1;
+        for(int j=0;j<=tip;j++)
+        {
+            nextcarry=((ans[j]*i)+carry)/10;
+            ans[j]=((ans[j]*i)+carry)%10;
+            if(nextcarry>0){
+                if(j==tip){
+                    tip++; 
+                }
+            }
+            carry=nextcarry;
+            
+        }
+        carry=0;
+        nextcarry=0;
+    }
+    for(int x=0;x<=tip;x++){
+        str+=to_string(ans[tip-x]);
+    }
+    
+    return str;
+}
