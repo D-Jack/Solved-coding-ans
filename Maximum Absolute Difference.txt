@@ -1,0 +1,24 @@
+int Solution::maxArr(vector<int> &A) {
+    int n=A.size();
+    int fpt=0;
+    int fmax=0;
+    int amax1=INT_MIN;
+    int amax2=INT_MIN;
+    int amin1=INT_MAX;
+    int amin2=INT_MAX;
+    for(int i=0;i<n;++i)
+    {
+        amax1=max(amax1,A[i]+i);
+        amax2=max(amax2,A[i]-i);
+        amin1=min(amin1,A[i]+i);
+        amin2=min(amin2,A[i]-i);
+        //(A[i]-i)-(A[j]-j) for this to max 
+        //we have to find max(A[i]-i)  -min ((A[i]-i)) when a[i]>a[j]
+        //whenA[j]>A[i] (A[j]+j)-(A[i]+i) for this to max 
+        //we have to find max(A[i]+i)  -min ((A[i]+i))
+        //then whoever is max in both these max value is our ans
+    }
+    
+    fmax=max(abs(amax1-amin1),abs(amax2-amin2));
+    return fmax;
+}

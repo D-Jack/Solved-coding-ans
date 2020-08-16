@@ -1,0 +1,50 @@
+void merge(vector<int> &A,int start,int mid,int end){
+    vector<int> temp;
+    int i=start,j=mid+1,k=0;
+    //i first array j second k temp
+    while(i<=mid&&j<=end)
+    {
+        if(A[i]<A[j]){
+            temp.push_back(A[i]);
+            
+            ++i;
+            
+        }
+        if(A[j]<A[i]){
+            temp.push_back(A[j]);
+            
+            ++j;
+            
+        }
+    }
+    while(i<=mid){
+        temp.push_back(A[i]);
+        
+        ++i;
+        
+    }
+    while(j<=end){
+        temp.push_back(A[j]);
+        
+        ++j;
+        
+    }
+    for(int q=start;q<=end;++q){
+        A[q]=temp[q-start];
+    }
+}
+void merge_sort(vector<int> &A,int start,int end)
+{
+    if(start>=end){
+        return ;
+    }
+    int mid=(start+end)/2;
+    merge_sort(A,start,mid);
+    merge_sort(A,mid+1,end);
+    merge(A,start,mid,end);
+    
+}
+int Solution::solve(vector<int> &A) {
+    merge_sort(A,0,A.size()-1);
+    return A[0]+A[A.size()-1];
+}
